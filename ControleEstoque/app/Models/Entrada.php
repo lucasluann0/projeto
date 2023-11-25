@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entrada extends Model {
 
@@ -10,7 +11,7 @@ class Entrada extends Model {
         'id',
         'idProduto',
         'quantidade',
-        'data',
+        'created_at',
         'idUsuario'
     ];
 
@@ -18,9 +19,13 @@ class Entrada extends Model {
 
     protected $table = 'entrada';
     
-    public function produtos()
+    public function produto(): BelongsTo
     {
-        return $this->belongsTo('App\Models\Produto');
+        return $this->belongsTo(Produto::class, 'idProduto');
     }
-    
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'idUsuario');
+    }
 }
