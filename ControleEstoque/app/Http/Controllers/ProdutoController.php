@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 use App\Models\Produto;
-
-use Illuminate\Support\Facades\Redirect;
 
 class ProdutoController extends Controller {
 
@@ -51,5 +49,10 @@ class ProdutoController extends Controller {
         $produto->fill($request->post())->save();
  
         return Redirect::to('/dashboard');
+    }
+
+    public function show(Produto $produto)
+    {
+        return view('details',compact('produto'));
     }
 }

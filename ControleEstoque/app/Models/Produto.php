@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Produto extends Model {
 
@@ -14,15 +15,15 @@ class Produto extends Model {
         'preco_venda'
     ];
     protected $table = 'produtos';
-    
-    public function entradas()
+
+    public function entradas(): HasMany
     {
-        return $this->hasMany('App\Models\Entrada');
+        return $this->hasMany(Entrada::class, 'idProduto');
     }
 
-    public function saidas()
+    public function saidas(): HasMany
     {
-        return $this->hasMany('App\Models\Saida');
+        return $this->hasMany(Saida::class, 'idProduto');
     }
     
     public function lucro()
